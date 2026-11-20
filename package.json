@@ -1,0 +1,20 @@
+{
+  "name": "task-tracker-starter",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18",
+    "npm": ">=7"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c magenta,cyan \"npm run dev -w server\" \"npm run dev -w client\"",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "9.2.5"
+  }
+}
