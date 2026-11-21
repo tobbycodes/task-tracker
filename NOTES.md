@@ -1,29 +1,30 @@
-# Task Tracker structure
+# Week 1 Assessment: Starter App Exploration
 
-The project has two main parts, managed as npm workspaces:
+## How the App Works
+This Task Tracker uses a React frontend (`client/src/App.jsx`) that communicates with an Express backend (`server/`) and a SQLite database via REST API endpoints. When a user creates, updates, or deletes a task in the UI, the frontend sends an HTTP request to the backend, which updates the database and returns the updated list.
 
-- `client/` is the React frontend. `src/main.jsx` mounts `App.jsx` into the page. `App.jsx` holds the task list and form/filter/edit values in React state, renders the interface, and handles user actions.
-- `server/` is the Express backend. `server.js` defines the HTTP API and parses JSON request bodies.
-- `server/db.js` initializes `sql.js`, a SQLite implementation compiled to WebAssembly, and reads/writes the database file at `server/data/tasks.db`. The `tasks` table stores each task's title, priority, due date, completion state, and creation time.
+## At least three things you would improve, and why
 
-## How data flows
+1. **The add form:** It lets users submit a blank task title because the submit handler has no `required` or non-empty check. Without this restriction, users can repeatedly add empty tasks, which sends unnecessary invalid requests to the backend.
+   * Code: `<button type="submit">Add</button>` — Line 82 (`client/src/App.jsx`)
 
-When the app opens, `App.jsx` sends `GET /api/tasks` and puts the JSON response into React state. Adding a task sends `POST /api/tasks`; editing or changing its completion state sends `PUT /api/tasks/:id`; deleting sends `DELETE /api/tasks/:id`. Express routes these requests to SQL queries in `db.js`, then responds with JSON. The frontend updates its state from those responses so React re-renders the task list.
+2. **Deletion button:** It deletes a task immediately without asking the user for confirmation first. Adding a browser confirmation prompt (`window.confirm`) before taking the action would reduce accidental deletions.
+   * Code: `<button onClick={() => deleteTask(t.id)}>Delete</button>` — Line 122 (`client/src/App.jsx`)
 
-During development, Vite serves the frontend on port 5173 and proxies requests beginning with `/api` to Express on port 4000, as configured in `client/vite.config.js`. The root `npm run dev` command starts both development servers.
+3. **Layout is not responsive:** The layout uses a fixed pixel width instead of adapting to smaller screens. Adding responsiveness from the form to the table would improve accessibility and usability for users on different devices.
+   * Code: `<table border="1" cellPadding="4" style={{ width: 900, borderCollapse: "collapse" }}>` — Line 93 (`client/src/App.jsx`)
 
-## Three improvements I would make
+## The prompts and AI tools you used to explore the app
 
-1. Validate task input in both the frontend and backend. For example, reject blank titles and unsupported priorities so invalid data cannot be saved by bypassing the UI.
-2. Handle failed API requests and show useful feedback. The current fetch calls do not check HTTP error responses or catch network failures, so the interface may not explain why an action failed.
-3. Improve accessibility and responsive layout. Add clear labels for form controls and make the fixed-width page/table usable on narrow screens.
+**Prompt used:**
+> **Role:** You are a senior full-stack software engineer reviewing a starter React + Express + SQLite application.
+> **Context:** I am exploring this task-tracker codebase (`@App.jsx` and the tagged `server/` files) to understand how the frontend and backend connect and where the app falls short.
+> **Task:** Explain how data flows between the frontend and backend, and identify at least four specific bugs, missing validations, or UX/security weaknesses with exact file names and line numbers.
+> **Constraints:** Do not rewrite or modify my code yet, and do not assume features exist unless they are explicitly written in the tagged files.
+> **Output format:** First, give a 4-bullet summary of the data flow. Second, provide a numbered list of issues with the file name, line number, and a one-sentence explanation of why it matters.
 
-## Prompts and AI tools used
+**AI Tools Used:** ChatGPT and GitHub Copilot in VS Code.
 
-- Prompt: “Explain how this Task Tracker app is structured. How does the React frontend in client/ communicate with the Express backend and SQLite database in server/?”
-- Follow-up prompt: “Explain how this Task Tracker app is structured ... Add a NOTES.md file to my repository with [the assessment requirements].”
-- Tool: Copilot Chat in VS Code. I checked the explanation against the project files, including `App.jsx`, `server.js`, `db.js`, and `vite.config.js`.
+## One thing AI got wrong or missed, and how you noticed
 
-## One thing AI missed
-
-The first draft of these notes explained the app but omitted the assessment's required improvements, prompts/tools, and AI-missed-item sections. I noticed by checking the requirements in `ASSESSMENT.md` and added those sections here.
+The one thing AI got wrong was the line numbers of the code it was explaining. For example, it said Line 63 had a fixed width of `900px`, but it was actually Line 93 (`client/src/App.jsx`). I noticed it by crosschecking the explanation it gave me against the actual code in VS Code.
