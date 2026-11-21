@@ -1,8 +1,5 @@
 # Week 1 Assessment: Starter App Exploration
 
-## How the App Works
-This Task Tracker uses a React frontend (`client/src/App.jsx`) that communicates with an Express backend (`server/`) and a SQLite database via REST API endpoints. When a user creates, updates, or deletes a task in the UI, the frontend sends an HTTP request to the backend, which updates the database and returns the updated list.
-
 ## At least three things you would improve, and why
 
 1. **The add form:** It lets users submit a blank task title because the submit handler has no `required` or non-empty check. Without this restriction, users can repeatedly add empty tasks, which sends unnecessary invalid requests to the backend.
