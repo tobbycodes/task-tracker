@@ -1,27 +1,67 @@
-# Task Tracker (Week 1 Starter App)
+# Task Tracker
 
-A simple task tracker for the She Code Africa AI Software Engineering track. React frontend, Express backend, SQLite database.
+## About the Project
 
-## Get your own copy
+Task Tracker is a full-stack application for organizing tasks. Users can create and manage tasks with priorities and due dates.
 
-1. Sign in to GitHub.
-2. Click **Use this template** → **Create a new repository**.
-3. Set the owner to **your own account**, name it `task-tracker`, choose **Public**, and click **Create repository**.
-4. Clone **your** new repository to your computer.
+## Features
 
-## Run it
+- Add tasks with a priority and due date
+- View all, active, or completed tasks
+- Mark tasks as completed or active
+- Edit task titles
+- Delete tasks
+- See how many tasks remain
 
-You need Node.js 18 or newer (20 recommended). Check with `node -v`.
+## Tech Used
 
-```
-npm install
+- React
+- Vite
+- Express
+- sql.js
+- SQLite
+- npm
+
+## Setup
+
+Before starting, install:
+
+- Git
+- Node.js 18 or newer
+- npm 7 or newer
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   cd task-tracker
+   ```
+
+2. Install the project dependencies:
+
+   ```bash
+   npm install
+   ```
+
+## How to Run the Project
+
+Start the application from the project folder:
+
+```bash
 npm run dev
 ```
 
-Then open http://localhost:5173
+Open http://localhost:5173 in your browser.
 
-## Week 1 assessment
+## Project Structure
 
-Explore the app with AI and write up what you'd improve. Due by 12 noon on Saturday.
-
-Read the full brief in [ASSESSMENT.md](ASSESSMENT.md).
+```text
+task-tracker/
+├── client/     # React frontend
+├── server/     # Express API and SQLite database
+├── package.json
+└── README.md
+```
+Note: I used Github Copilot and connected 
