@@ -64,4 +64,4 @@ task-tracker/
 ├── package.json
 └── README.md
 ```
-Note: I used Github Copilot and connected 
+Note: I used Github Copilot and checked that AI didn't go overboard by complicating the README doc.
